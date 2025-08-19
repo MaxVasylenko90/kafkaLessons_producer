@@ -1,7 +1,7 @@
 package dev.mvasylenko.service.impl;
 
 import dev.mvasylenko.entity.ProductModel;
-import dev.mvasylenko.event.ProductCreatedEvent;
+import dev.mvasylenko.kafka_util.ProductCreatedEvent;
 import dev.mvasylenko.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

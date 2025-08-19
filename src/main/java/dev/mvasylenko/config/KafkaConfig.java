@@ -1,6 +1,6 @@
 package dev.mvasylenko.config;
 
-import dev.mvasylenko.event.ProductCreatedEvent;
+import dev.mvasylenko.kafka_util.ProductCreatedEvent;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,7 +44,7 @@ public class KafkaConfig {
     private String maxInFlightRequestsPerConnection;
 
 
-    Map<String, Object> producerConfigs() {
+    public Map<String, Object> producerConfigs() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, keySerializer);
@@ -59,17 +59,17 @@ public class KafkaConfig {
     }
 
     @Bean
-    ProducerFactory<String, ProductCreatedEvent> producerFactory() {
+    public ProducerFactory<String, ProductCreatedEvent> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    KafkaTemplate<String, ProductCreatedEvent> kafkaTemplate() {
+    public KafkaTemplate<String, ProductCreatedEvent> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 
     @Bean
-    NewTopic createProductCreatedTopic() {
+    public NewTopic createProductCreatedTopic() {
         return TopicBuilder.name("product-created-events-topic")
                 .partitions(5)
                 .replicas(3)
