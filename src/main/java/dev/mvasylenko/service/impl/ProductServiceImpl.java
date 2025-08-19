@@ -31,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
         //with .get() - syncronious approach, with .whenComplete() or without anything - asynchronious
 //        SendResult<String, ProductCreatedEvent> result =
 //                kafkaTemplate.send("topic6", productId, productCreatedEvent).get();
-        kafkaTemplate.send("topic6", productId, productCreatedEvent);
+        kafkaTemplate.send("product-created-events-topic", productId, productCreatedEvent);
 
 //        CompletableFuture<SendResult<String, ProductCreatedEvent>> future =
 //                kafkaTemplate.send("product-created-events-topic", productId, productCreatedEvent);
